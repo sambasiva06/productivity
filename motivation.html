@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivation | Galaxy Study OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-enter">
+    <div class="galaxy-bg"></div>
+
+    <nav class="navbar glass-panel">
+        <div class="logo">GALAXY STUDY OS</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="schedule.html" class="nav-link">Schedule</a></li>
+            <li><a href="calendar.html" class="nav-link">Consistency</a></li>
+            <li><a href="motivation.html" class="nav-link active">Motivation</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1 class="page-title">Cosmic <span>Inspiration</span></h1>
+            <p class="page-subtitle">Fuel your journey through the mental void.</p>
+        </header>
+
+        <section class="quote-container">
+            <!-- Quotes will be mapped here -->
+        </section>
+
+    </main>
+
+    <style>
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 150px 20px 100px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            margin-bottom: 10px;
+        }
+
+        .page-title span {
+            background: linear-gradient(to right, var(--primary-cyan), var(--primary-magenta));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .quote-container {
+            display: grid;
+            gap: 40px;
+        }
+
+        .quote-card {
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            animation: slideUpFade 1s both;
+        }
+
+        .quote-text {
+            font-size: 1.4rem;
+            line-height: 1.4;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: var(--text-white);
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                margin-bottom: 40px;
+            }
+
+            .quote-card {
+                padding: 20px;
+            }
+
+            .quote-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+
+    <script src="script.js"></script>
+    <script>
+        const quotes = [
+            { text: "Consistency is the gravity that holds your universe together.", author: "The Captain" },
+            { text: "The stars don't shine without darkness. Your struggle is the fuel for your light.", author: "Obsidian Mind" },
+            { text: "Discipline is the engine of a starship. Motivation is just the initial spark.", author: "Sector 7 Sage" },
+            { text: "Beyond the horizon of your comfort zone lies the expansion of your soul.", author: "Cosmic Voyager" }
+        ];
+
+        const container = document.querySelector('.quote-container');
+        container.innerHTML = quotes.map((q, i) => `
+            <div class="quote-card glass-panel" style="animation-delay: ${0.2 + i * 0.2}s">
+                <p class="quote-text">${q.text}</p>
+                <p class="quote-author">— ${q.author}</p>
+            </div>
+        `).join('');
+    </script>
+</body>
+
+</html>

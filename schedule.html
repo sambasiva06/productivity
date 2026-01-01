@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Schedule | Galaxy Study OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-enter">
+    <div class="galaxy-bg"></div>
+
+    <nav class="navbar glass-panel">
+        <div class="logo">GALAXY STUDY OS</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="schedule.html" class="nav-link active">Schedule</a></li>
+            <li><a href="calendar.html" class="nav-link">Consistency</a></li>
+            <li><a href="motivation.html" class="nav-link">Motivation</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1 class="page-title">Mission <span>Timeline</span></h1>
+            <p class="page-subtitle">Select a day to view your tactical learning orbit.</p>
+        </header>
+
+        <section class="day-selector">
+            <button class="day-btn glass-panel active" data-day="Mon">Mon</button>
+            <button class="day-btn glass-panel" data-day="Tue">Tue</button>
+            <button class="day-btn glass-panel" data-day="Wed">Wed</button>
+            <button class="day-btn glass-panel" data-day="Thu">Thu</button>
+            <button class="day-btn glass-panel" data-day="Fri">Fri</button>
+            <button class="day-btn glass-panel" data-day="Sat">Sat</button>
+            <button class="day-btn glass-panel" data-day="Sun">Sun</button>
+        </section>
+
+        <section id="schedule-content" class="schedule-display">
+            <!-- Timetable injected here by JS -->
+        </section>
+    </main>
+
+    <style>
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 150px 20px 100px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        .day-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            /* Fix: allow buttons to wrap on mobile */
+        }
+
+        .day-btn {
+            padding: 10px 20px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-white);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .task-card {
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .task-time {
+                min-width: 100px;
+                font-size: 1.1rem;
+            }
+        }
+
+        .day-btn:hover {
+            border-color: var(--primary-purple);
+            transform: translateY(-2px);
+        }
+
+        .day-btn.active {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-magenta));
+            border: none;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .schedule-display {
+            display: grid;
+            gap: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .task-card {
+            padding: 25px 35px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            transform-origin: left;
+            animation: slideInTask 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .task-time {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            min-width: 150px;
+        }
+
+        .task-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .task-info p {
+            color: var(--text-dim);
+        }
+
+        .task-icon {
+            font-size: 2rem;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInTask {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .task-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .task-time {
+                min-width: auto;
+            }
+        }
+    </style>
+
+    <script src="script.js"></script>
+    <script>
+        const scheduleData = {
+            'Mon': [
+                { time: '06:30 PM', task: 'GFG DSA 360', desc: 'Hardcore GFG problem solving & patterns', icon: '🧬' },
+                { time: '07:45 PM', task: 'Striver DSA', desc: 'Striver Sheet rigorous practice', icon: '⚡' },
+                { time: '09:00 PM', task: 'Dinner Break', desc: 'Fuel for the system', icon: '🍱' },
+                { time: '09:30 PM', task: 'Core CS Mastery', desc: 'DBMS, OS, or CN deep dive (30m)', icon: '💻' },
+                { time: '10:00 PM', task: 'Aptitude & Reasoning', desc: 'Daily grind for massive improvement', icon: '🧩' }
+            ],
+            'Tue': [
+                { time: '06:30 PM', task: 'GFG DSA 360', desc: 'Hardcore GFG problem solving & patterns', icon: '🧬' },
+                { time: '07:45 PM', task: 'Striver DSA', desc: 'Striver Sheet rigorous practice', icon: '⚡' },
+                { time: '09:00 PM', task: 'Dinner Break', desc: 'Fuel for the system', icon: '🍱' },
+                { time: '09:30 PM', task: 'Core CS Mastery', desc: 'DBMS, OS, or CN deep dive (30m)', icon: '💻' },
+                { time: '10:00 PM', task: 'Aptitude & Reasoning', desc: 'Daily grind for massive improvement', icon: '🧩' }
+            ],
+            'Wed': [
+                { time: '06:30 PM', task: 'Smart Interviews', desc: 'SI Concepts, Heavy DSA & Problem Solving (till 9 PM)', icon: '🧠' },
+                { time: '09:00 PM', task: 'Dinner Break', desc: 'Fuel for the system', icon: '🍱' },
+                { time: '09:30 PM', task: 'SQL Mastery', desc: 'Advanced Queries & Database Performance (till 11 PM)', icon: '📊' },
+                { time: '11:00 PM', task: 'Daily Revision', desc: 'Consolidating today\'s learning', icon: '✍️' }
+            ],
+            'Thu': [
+                { time: '06:30 PM', task: 'Smart Interviews', desc: 'SI Concepts, Heavy DSA & Problem Solving (till 9 PM)', icon: '🧠' },
+                { time: '09:00 PM', task: 'Dinner Break', desc: 'Fuel for the system', icon: '🍱' },
+                { time: '09:30 PM', task: 'SQL Mastery', desc: 'Advanced Queries & Database Performance (till 11 PM)', icon: '📊' },
+                { time: '11:00 PM', task: 'Daily Revision', desc: 'Consolidating today\'s learning', icon: '✍️' }
+            ],
+            'Fri': [
+                { time: '06:30 PM', task: 'GFG DSA 360', desc: 'Hardcore GFG problem solving & patterns', icon: '🧬' },
+                { time: '07:45 PM', task: 'Striver DSA', desc: 'Striver Sheet rigorous practice', icon: '⚡' },
+                { time: '09:00 PM', task: 'Dinner Break', desc: 'Fuel for the system', icon: '🍱' },
+                { time: '09:30 PM', task: 'Core CS Mastery', desc: 'DBMS, OS, or CN deep dive (30m)', icon: '💻' },
+                { time: '10:00 PM', task: 'Aptitude & Reasoning', desc: 'Daily grind for massive improvement', icon: '🧩' }
+            ],
+            'Sat': [
+                { time: '06:30 PM', task: 'GFG DSA 360', desc: 'Hardcore GFG problem solving & patterns', icon: '🧬' },
+                { time: '07:45 PM', task: 'Striver DSA', desc: 'Striver Sheet rigorous practice', icon: '⚡' },
+                { time: '09:00 PM', task: 'Dinner Break', desc: 'Fuel for the system', icon: '🍱' },
+                { time: '09:30 PM', task: 'Core CS Mastery', desc: 'DBMS, OS, or CN deep dive (30m)', icon: '💻' },
+                { time: '10:00 PM', task: 'Aptitude & Reasoning', desc: 'Daily grind for massive improvement', icon: '🧩' }
+            ],
+            'Sun': [
+                { time: '09:00 AM', task: 'React / Spring Boot', desc: 'Pure Frontend or Backend Deep Work', icon: '⚛️' },
+                { time: '02:00 PM', task: 'API & Database', desc: 'Backend integration & optimizations', icon: '📊' },
+                { time: '06:00 PM', task: 'DSA & SQL Breakout', desc: '2hr DSA Recall + 1hr SQL Mastery', icon: '🧬' },
+                { time: '09:30 PM', task: 'Deploy & Build', desc: 'Feature integration & real project growth', icon: '🚀' }
+            ]
+        };
+
+        function renderSchedule(day) {
+            const container = document.getElementById('schedule-content');
+            const tasks = scheduleData[day];
+
+            container.innerHTML = tasks.map((t, index) => `
+                <div class="task-card glass-panel" style="animation-delay: ${index * 0.1}s">
+                    <div class="task-icon">${t.icon}</div>
+                    <div class="task-time">${t.time}</div>
+                    <div class="task-info">
+                        <h3>${t.task}</h3>
+                        <p>${t.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('.day-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderSchedule(btn.dataset.day);
+            });
+        });
+
+        // Initial render
+        renderSchedule('Mon');
+    </script>
+</body>
+
+</html>

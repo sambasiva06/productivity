@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consistency Tracker | Galaxy Study OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-enter">
+    <div class="galaxy-bg"></div>
+
+    <nav class="navbar glass-panel">
+        <div class="logo">GALAXY STUDY OS</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="schedule.html" class="nav-link">Schedule</a></li>
+            <li><a href="calendar.html" class="nav-link active">Consistency</a></li>
+            <li><a href="motivation.html" class="nav-link">Motivation</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1 class="page-title">Discipline <span>Star-Chart</span></h1>
+            <p class="page-subtitle">Track your missions across 180 days. Click to cycle: Untouched → Completed (Green)
+                → Failed (Red).</p>
+        </header>
+
+        <section class="calendar-stats glass-panel">
+            <div class="stat">
+                <span class="stat-label">System Streak</span>
+                <span id="streak-val" class="stat-value">0 Days</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Mission Completion</span>
+                <span id="completion-val" class="stat-value">0%</span>
+            </div>
+        </section>
+
+        <div id="calendar-container" class="calendar-container">
+            <!-- Monthly blocks will be injected here -->
+        </div>
+    </main>
+
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 150px 20px 100px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            margin-bottom: 10px;
+        }
+
+        .page-title span {
+            background: linear-gradient(to right, var(--primary-cyan), var(--primary-magenta));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            color: var(--text-dim);
+        }
+
+        .calendar-stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 30px;
+            margin-bottom: 50px;
+            border-radius: 30px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            text-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+
+        .calendar-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 10px 0;
+        }
+
+        .month-block {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .month-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-magenta);
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .weekday-labels {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .weekday-label {
+            font-size: 0.7rem;
+            color: var(--primary-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .day-cell {
+            aspect-ratio: 1/1;
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .day-cell.empty {
+            border: none;
+            background: transparent;
+            cursor: default;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .calendar-stats {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .calendar-grid {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 5px;
+            }
+
+            .day-cell {
+                font-size: 0.65rem;
+            }
+        }
+
+        .day-cell:hover {
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            z-index: 10;
+        }
+
+        .day-cell.completed {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+            color: #22c55e;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+        }
+
+        .day-cell.failed {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            color: #ef4444;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .calendar-stats {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .calendar-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script src="script.js"></script>
+    <script>
+        const STORAGE_KEY = 'galaxy_study_os_tracker';
+        let trackerData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
+        function initCalendar() {
+            const container = document.getElementById('calendar-container');
+            container.innerHTML = '';
+
+            const months = [
+                { name: 'January', days: 31 },
+                { name: 'February', days: 28 },
+                { name: 'March', days: 31 },
+                { name: 'April', days: 30 },
+                { name: 'May', days: 31 },
+                { name: 'June', days: 30 },
+                { name: 'July - Interview Preparedness', days: 31 }
+            ];
+
+            const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+            let totalDaysInPeriod = 0;
+
+            months.forEach((m, monthIndex) => {
+                const monthBlock = document.createElement('div');
+                monthBlock.className = 'month-block';
+
+                const header = document.createElement('div');
+                header.className = 'month-header';
+                header.innerText = m.name;
+                monthBlock.appendChild(header);
+
+                const labels = document.createElement('div');
+                labels.className = 'weekday-labels';
+                weekdays.forEach(w => {
+                    const l = document.createElement('div');
+                    l.className = 'weekday-label';
+                    l.innerText = w;
+                    labels.appendChild(l);
+                });
+                monthBlock.appendChild(labels);
+
+                const grid = document.createElement('div');
+                grid.className = 'calendar-grid';
+
+                // Calculate offset for 2026
+                // Jan 1, 2026 is a Thursday (index 4 in 0-6 Sun-Sat)
+                // We want M-S (0-6)
+                // Date.getDay(): 0=Sun, 1=Mon, ..., 4=Thu, ..., 6=Sat
+                // Our grid: 0=Mon, 1=Tue, 2=Wed, 3=Thu, 4=Fri, 5=Sat, 6=Sun
+                const dateObj = new Date(2026, monthIndex, 1);
+                let startDay = dateObj.getDay(); // 0(Sun) - 6(Sat)
+                let offset = startDay === 0 ? 6 : startDay - 1; // 0(Mon) - 6(Sun)
+
+                for (let i = 0; i < offset; i++) {
+                    const empty = document.createElement('div');
+                    empty.className = 'day-cell empty';
+                    grid.appendChild(empty);
+                }
+
+                for (let day = 1; day <= m.days; day++) {
+                    const dateStr = `2026-${String(monthIndex + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const cell = document.createElement('div');
+                    cell.className = 'day-cell';
+                    if (trackerData[dateStr]) cell.classList.add(trackerData[dateStr]);
+
+                    cell.innerText = day;
+                    cell.dataset.date = dateStr;
+                    cell.addEventListener('click', () => cycleState(cell, dateStr));
+                    grid.appendChild(cell);
+                    totalDaysInPeriod++;
+                }
+
+                monthBlock.appendChild(grid);
+                container.appendChild(monthBlock);
+            });
+
+            window.totalPeriodDays = totalDaysInPeriod;
+            updateStats();
+        }
+
+        function cycleState(cell, dateStr) {
+            if (cell.classList.contains('completed')) {
+                cell.classList.remove('completed');
+                cell.classList.add('failed');
+                trackerData[dateStr] = 'failed';
+            } else if (cell.classList.contains('failed')) {
+                cell.classList.remove('failed');
+                trackerData[dateStr] = null;
+                delete trackerData[dateStr];
+            } else {
+                cell.classList.add('completed');
+                trackerData[dateStr] = 'completed';
+            }
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(trackerData));
+            updateStats();
+        }
+
+        function updateStats() {
+            const values = Object.values(trackerData);
+            const completed = values.filter(v => v === 'completed').length;
+            const total = window.totalPeriodDays || 212;
+
+            document.getElementById('completion-val').innerText = `${Math.round((completed / total) * 100)}%`;
+            document.getElementById('streak-val').innerText = `${completed} Missions`;
+        }
+
+        initCalendar();
+    </script>
+</body>
+
+</html>

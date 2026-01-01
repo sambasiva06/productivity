@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy Study OS | Futuristic Productivity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-enter">
+    <div class="galaxy-bg"></div>
+
+    <nav class="navbar glass-panel">
+        <div class="logo">GALAXY STUDY OS</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="schedule.html" class="nav-link">Schedule</a></li>
+            <li><a href="calendar.html" class="nav-link">Consistency</a></li>
+            <li><a href="motivation.html" class="nav-link">Motivation</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1 class="hero-title">Welcome to the <br><span>Future of Learning</span></h1>
+            <p class="hero-desc">Experience productivity in a new dimension. Track your progress, maintain consistency,
+                and stay motivated across the cosmos.</p>
+            <div class="cta-group">
+                <a href="schedule.html" class="cta-button primary">Enter System</a>
+                <a href="calendar.html" class="cta-button secondary">View Tracker</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card glass-panel" style="animation-delay: 0.2s">
+                <div class="icon">📅</div>
+                <h3>Intelligent Schedule</h3>
+                <p>Dynamic timetable system optimized for high-performance learning phases.</p>
+            </div>
+            <div class="feature-card glass-panel" style="animation-delay: 0.4s">
+                <div class="icon">✨</div>
+                <h3>Consistency Tracker</h3>
+                <p>Visualize your discipline through light-years of progress tracking.</p>
+            </div>
+            <div class="feature-card glass-panel" style="animation-delay: 0.6s">
+                <div class="icon">🚀</div>
+                <h3>Cosmic Motivation</h3>
+                <p>Curated inspiration designed to fuel your journey through the toughest challenges.</p>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 150px 20px 100px;
+            text-align: center;
+        }
+
+        .hero {
+            margin-bottom: 80px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -2px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(to right, var(--primary-cyan), var(--primary-magenta));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: clamp(1rem, 4vw, 1.25rem);
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 16px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .cta-button.primary {
+            background: var(--primary-cyan);
+            color: #000;
+        }
+
+        .cta-button.primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.4);
+        }
+
+        .cta-button.secondary {
+            border: 1px solid var(--glass-border);
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            text-align: left;
+            border-radius: 24px;
+        }
+
+        .feature-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .feature-card p {
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                margin-bottom: 50px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
